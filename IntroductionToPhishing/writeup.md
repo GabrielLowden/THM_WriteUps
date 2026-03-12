@@ -1,23 +1,21 @@
 # Challenge Write-Up: <Introduction to Phishing>
 
 ## Platform / Event
-<TryHackMe SOC Simulator>
+TryHackMe SOC Simulator
 
 ## Difficulty
-<Easy>
+Easy
 
 ## Date Completed
-<2026-03-11>
+2026-03-11
 
 ---
 
-# 1. Objective
+# 1. Objectives For Scenario
 
-"
 - Monitor and analyze real-time alerts
 - Identify and document critical events such as suspicious emails and attachments
 - Create detailed case reports based on your observations to help your team understand the full scope of alerts and malicious activity
-"
 
 ---
 
@@ -45,12 +43,12 @@
 ![alertqueue.png did not load](/IntroductionToPhishing/screenshots/alert-queue.png)
 - The rule triggered from an external link inside an inbound email
 - The rule description gives good direction by suggesting to investigate whether the links were clicked or not
-- The alert gives us the email content & inside the link: [<a href="https://hrconnex.thm/onboarding/15400654060/j.garcia">Set Up My Profile</a>]
+- The alert gives us the email content & inside the link: ["<a href="https://hrconnex.thm/onboarding/15400654060/j.garcia">Set Up My Profile</a>"]
     - VirusTotal & DNSDumpster tell us the domain is invalid...it was made up for the scenario
 
 ## For Reference
 ![datasources.png not loaded](/IntroductionToPhishing/screenshots/datasources.png)
-- As alerts come in it is good to know they will come from either firewall logs or email logs
+- For challenge we are given two different logs to review
 - And that there is 87 unique documents to sift through
 
 ---
@@ -66,6 +64,7 @@ Steps I took:
 + Duediligence
     + KQL Query [sender: "onboarding@hrconnex.thm"]
         + 2 emails total from this sender to the same recipient
+
 Conclusion:
 + Close Case and report as False Positive
 
@@ -78,6 +77,7 @@ Steps Taken:
     ![firewallBlock8815.png did not load](/IntroductionToPhishing/screenshots/firewallBlock8815.png)
     + User clicked link, but was blocked by firewall --> User Awareness Training... 
     + Only 1 result from firewall, so no other user clicked link
+
 Conclusion:
 + Close case and report as True Positive
 
@@ -87,6 +87,7 @@ Conclusion:
 Steps Taken:
 + Recognise this is related to ID 8815 --> same URL, source/destinations IPs, ports, etc
     + Already know that this alert is a True positive from previous alert 8815
+
 Conclusion:
 + Close case and report as True Positive
 
@@ -95,12 +96,13 @@ Conclusion:
 ![alert8817.png did not load](/IntroductionToPhishing/screenshots/alert8817.png)
 Steps Taken:
 + Review firewall logs for web-browsing to URL inside alert
+    + URL is an example of typo squatting --> likely phish
     + KQL Query: [datasource : "firewall" and URL: "https://m1crosoftsupport.co/login"]
     + The user clicked the link and the website was not blocked! --> Investigate website/URL/IP more
         + Use Virus Total to check reputation...
         ![maliciousIP.png did not load](/IntroductionToPhishing/screenshots/maliciousIP.png)
         + **The user clicked a link that is malicious!**
-        
+
 Conclusion:
 + Close case and report as True Positive
 
@@ -110,6 +112,7 @@ Conclusion:
 Steps Taken:
 + Because I did my duediligence in analysis of alert 8814, I know that the email was sent twice.
     + Our rules just alerted again for a repeated email
+
 Conclusion:
 + Close case and report as False Positive
 
@@ -117,21 +120,36 @@ Conclusion:
 
 # Stats/Results
 
-## ID 8814 - Correct
+- ID 8814 - Correct
+
 Answer: False Positive
+
 My Submission: False Positive
-## ID 8815 - Incorrect
+
+- ID 8815 - Incorrect
+
 Answer: False Positive
+
 My Submission: True Positive
-## ID 8816 - Correct
+
+- ID 8816 - Correct
+
 Answer: True Positive
+
 My Submission: True Positive
-## ID 8817 - Correct
+
+- ID 8817 - Correct
+
 Answer: True Positive
+
 My Submission: True Positive
-## ID 8818 - Correct
+
+- ID 8818 - Correct
+
 Answer: False Positive
+
 My Submission: False Positive
+
 
 # Other Opinions/Observations
 + In a real world scenario some proactive measures to take not available in the sim:
