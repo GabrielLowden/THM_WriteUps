@@ -9,29 +9,23 @@ Easy
 ## Date Completed
 2026-03-11
 
----
 
 # 1. Objectives For Scenario
 
 - Monitor and analyze real-time alerts
 - Identify and document critical events such as suspicious emails and attachments
-- Create detailed case reports based on your observations to help your team understand the full scope of alerts and malicious activity
 
----
 
 # 2. Challenge Description
 
 "Learn how to use SOC Simulator by completing your first scenario. Close all True Positive alerts to pass!"
 
----
 
 # 3. Files / Artifacts Provided
 
 - Alert queue
 - Access to Elastic SIEM Tool
 
-
----
 
 # 4. Initial Recon / Observations
 
@@ -51,7 +45,6 @@ Easy
 - For challenge we are given two different logs to review
 - And that there is 87 unique documents to sift through
 
----
 
 # 5. Analysis
 
@@ -116,39 +109,35 @@ Steps Taken:
 Conclusion:
 + Close case and report as False Positive
 
----
 
 # Stats/Results
 
 - ID 8814 - Correct
 
-Answer: False Positive
+    - Answer: False Positive
+    - My Submission: False Positive
 
-My Submission: False Positive
+- ID 8815 - **Incorrect**
 
-- ID 8815 - Incorrect
-
-Answer: False Positive
-
-My Submission: True Positive
+    - Answer: False Positive
+    - My Submission: True Positive
+    - Why Incorrect Classification:
+        - The website was blocked so THM considered this alert a false alerm
 
 - ID 8816 - Correct
 
-Answer: True Positive
-
-My Submission: True Positive
+    - Answer: True Positive
+    - My Submission: True Positive
 
 - ID 8817 - Correct
 
-Answer: True Positive
-
-My Submission: True Positive
+    - Answer: True Positive
+    - My Submission: True Positive
 
 - ID 8818 - Correct
 
-Answer: False Positive
-
-My Submission: False Positive
+    - Answer: False Positive
+    - My Submission: False Positive
 
 
 # Other Opinions/Observations
